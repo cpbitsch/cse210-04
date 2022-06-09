@@ -16,7 +16,9 @@ class Director(VideoService,KeyboardService):
 
     def _start_game(self, cast):
 
-        "Starts the game."
+        """Starts the game.
+            Definitions:
+                None."""
 
         self._video_service.open_window()
         while self._video_service.is_open_window():
@@ -27,19 +29,44 @@ class Director(VideoService,KeyboardService):
 
     def _do_inputs(self, cast):
 
-        "Gets movement inputs from player and applies it to the character."
+        """Gets movement inputs from player and applies it to the character.
+            Definitions:
+                player: The player character that is moving around.
+                movement: The current direction of movement of the player."""
 
-        player = cast.get_direction()
+        player = cast.get_first_actor("player")
+        movement = self._keyboard_service.get_direction()
+        player.set_velocity(movement)
 
-    def _do_updates(self):
+    def _do_updates(self, cast):
 
-        "Updates game with inputs obtained, monitors for interactions."
+        """Updates game with inputs obtained, monitors for interactions.
+            Definitions:
+                banner: Words that display information about interactions.
+                player: The player character that is moving around.
+                falling_objects: Falling objects in the game.  Includes rocks and gems."""
 
-    def _do_outputs(self):
+        banner = cast.get_first_actor("banners")
+        player = cast.get_first_actor("players")
+        falling_objects = cast.get_actors("falling_objects")
 
-        "Outputs information to the player, specifically creates the objects and character on the screen."
+        banner.set_text("")
+        maximum_x = self._video_service.get_width()
+        maximum_y = self._video_service.get_height()
+        player.move_next(maximum_x,maximum_y)
+
+        for falling_object in falling_objects:
+            if player.get_position() == falling_object.get_position():
+                message = falling_object.get_message()
+                banner.set_text(message)
+
+    def _do_outputs(self, cast):
+
+        """Outputs information to the player, specifically creates the objects and character on the screen.
+            Definitions:
+            actors: All actors present in the game.  See actor.py for more details."""
 
         self._video_service.clear_buffer()
-        actors = cast.
+        actors = cast.get_all_actors()
         self._video_service.draw_actors(actors)
         self._video_service.flush_buffer()
