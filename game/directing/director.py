@@ -17,7 +17,7 @@ class Director(VideoService,KeyboardService):
     def _start_game(self, cast):
 
         "Starts the game."
-
+        self._video_service.clear_buffer()
         self._video_service.open_window()
         while self._video_service.is_open_window():
             self._do_inputs(cast)
@@ -27,14 +27,14 @@ class Director(VideoService,KeyboardService):
 
     def _do_inputs(self, cast):
 
-        "Gets movement inputs from player."
+        "Gets movement inputs from player and applies it to the character."
 
         player = cast.get_direction()
 
     def _do_updates(self):
 
-        "Updates game with inputs obtained."
+        "Updates game with inputs obtained, monitors for interactions."
 
     def _do_outputs(self):
 
-        "Outputs information to the player."
+        "Outputs information to the player, specifically creates the objects and character on the screen."
