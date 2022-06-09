@@ -16,9 +16,13 @@ class Director(VideoService,KeyboardService):
         self.is_playing = True
 
     def start_game(self):
+        "Starts the game."
 
     def do_inputs(self):
+        "Gets inputs from player."
 
     def do_updates(self):
+        "Updates game with inputs obtained."
 
-    def do_outputs(self);
+    def do_outputs(self):
+        "Outputs information to the player."
