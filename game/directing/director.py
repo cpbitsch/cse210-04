@@ -14,3 +14,11 @@ class Director(VideoService,KeyboardService):
         Initializes the object and sets the attributes
         """
         self.is_playing = True
+
+    def start_game(self):
+
+    def do_inputs(self):
+
+    def do_updates(self):
+
+    def do_outputs(self);
