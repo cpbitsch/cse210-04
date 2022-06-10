@@ -1,5 +1,8 @@
 # cse210-04
 
+santiago: work on getting points and scoring for gems and rocks functional
+shawn: work on a stretch goal, possibly timer or something like that
+
 Greed
     Classes:
         Actor: store and keep track of attributes and methods common to all actors
@@ -91,4 +94,3 @@ Order
             add
             scale
             equals
-
