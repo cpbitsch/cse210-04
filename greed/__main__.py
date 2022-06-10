@@ -49,7 +49,7 @@ def main():
     
 
     player = Actor()
-    player.set_text("O")
+    player.set_text("<|^|>")
     player.set_font_size(FONT_SIZE)
     player.set_color(WHITE)
     player.set_position(x, y)

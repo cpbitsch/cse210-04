@@ -2,13 +2,13 @@ from game.casting.actor import Actor
 from game.shared.color import Color
 from game.shared.point import Point
 from game.casting.cast import Cast
-import random
+from random import randint
 
 class Rock(Actor):
 
     def __init__(self):
         super().__init__
-        self.set_velocity(Point(0, 15))
+        self.set_velocity(Point(0, randint(10,20)))
 
     def create_new(self):
         x = random.randint(1, 59)

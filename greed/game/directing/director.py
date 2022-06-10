@@ -20,6 +20,7 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
+        self.score = 0
         
     def start_game(self, cast, gem, rock, point):
         """Starts the game using the given cast. Runs the main game loop.
@@ -64,23 +65,22 @@ class Director:
 
         for gem in gems:
             gem.move_next(max_x, max_y)
-
-            # if gem.get_position() < point(900, 15):
-            #     x = random.randint(1, 59)
-            #     y = 2
-            #     gem.set_position(x, y)
-            
-        # if len(gems) < 40:
-        #     gem.create_new()
-        #     cast.add_actor("gem", gem)
-
+            # Check if gem possition is equal to Player
+            if (player.get_position().get_x() > gem.get_position().get_x() - 20 and player.get_position().get_x() < gem.get_position().get_x() + 10
+            and player.get_position().get_y() > gem.get_position().get_y() - 20 and player.get_position().get_y() < gem.get_position().get_y() + 10):
+                print("hit a Gem!!!")
+                self.score += 1
+                gem.move_next(max_x, 1)
+        
         for rock in rocks:
             rock.move_next(max_x, max_y)
-        # rock.create_new()
-        # cast.add_actor("rock", rock)
+            # Check if rock possition is equal to Player
+            if (player.get_position().get_x() > rock.get_position().get_x() - 20 and player.get_position().get_x() < rock.get_position().get_x() + 10
+            and player.get_position().get_y() > rock.get_position().get_y() - 20 and player.get_position().get_y() < rock.get_position().get_y() + 10):
+                print("hit a ROCK!!!")
+                self.score -= 1
+                rock.move_next(max_x, 1)
 
-
-        # if len(rocks) < 40:
 
 
     def _do_outputs(self, cast):
@@ -91,6 +91,6 @@ class Director:
         """
         self._video_service.clear_buffer()
         actors = cast.get_all_actors()
+        self._video_service.draw_points(self.score)
         self._video_service.draw_actors(actors)
         self._video_service.flush_buffer()
-        # self._video_service._draw_grid()

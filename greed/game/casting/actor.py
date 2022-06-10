@@ -1,5 +1,6 @@
 from game.shared.color import Color
 from game.shared.point import Point
+from random import randint
 
 
 class Actor:
@@ -77,8 +78,14 @@ class Actor:
             max_x (int): The maximum x value.
             max_y (int): The maximum y value.
         """
-        x = (self._position.get_x() + self._velocity.get_x()) % max_x
-        y = (self._position.get_y() + self._velocity.get_y()) % max_y
+        # Checking if at bottom of the screen
+        if ((self.get_text() == "O" or self.get_text() == "*") and (self._position.get_y() > 580)):
+            #print(self.get_text() + " reached bottom " + str(max_y))
+            x = randint(0,max_x)
+            y = (self._position.get_y() + self._velocity.get_y()) % max_y
+        else:
+            x = (self._position.get_x() + self._velocity.get_x()) % max_x
+            y = (self._position.get_y() + self._velocity.get_y()) % max_y
         self._position = Point(x, y)
 
     def set_color(self, color):

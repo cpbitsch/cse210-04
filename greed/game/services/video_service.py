@@ -1,5 +1,7 @@
 import pyray
 
+from game.shared.color import Color
+
 
 class VideoService:
     """Outputs the game state. The responsibility of the class of objects is to draw the game state 
@@ -32,9 +34,12 @@ class VideoService:
         if self._debug == True:
             self._draw_grid()
     
+    def draw_points(self, score):
+        color = Color(255, 255, 255).to_tuple()
+        pyray.draw_text("SCORE: " + str(score), 780, 10, 15, color)
+
     def draw_actor(self, actor):
         """Draws the given actor's text on the screen.
-
         Args:
             actor (Actor): The actor to draw.
         """ 
