@@ -1,4 +1,4 @@
-import pyray as pyray
+import pyray
 
 
 class VideoService:

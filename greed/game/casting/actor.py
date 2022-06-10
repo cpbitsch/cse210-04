@@ -64,6 +64,11 @@ class Actor:
         """
         return self._velocity
     
+    def get_point(self, x, y):
+
+        return Point(x, y)
+
+
     def move_next(self, max_x, max_y):
         """Moves the actor to its next position according to its velocity. Will wrap the position 
         from one side of the screen to the other when it reaches the given maximum x and y values.
@@ -84,12 +89,15 @@ class Actor:
         """
         self._color = color
 
-    def set_position(self, position):
+    def set_position(self, x, y):
         """Updates the position to the given one.
         
         Args:
             position (Point): The given position.
         """
+        position = Point(x, y)
+        position = position.scale(15)
+        
         self._position = position
     
     def set_font_size(self, font_size):
